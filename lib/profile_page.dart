@@ -10,6 +10,29 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Container(
+          // color: Colors.amber,
+          child: Column(
+            children: [
+              UserAccountsDrawerHeader(
+                onDetailsPressed: () {},
+                otherAccountsPicturesSize: const Size.square(35),
+                otherAccountsPictures: [
+                  CircleAvatar(backgroundImage: NetworkImage(imgUrl))
+                ],
+                currentAccountPicture: const CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/pro_pic.jpg')),
+                accountName: const Text('Aarick Hilson'),
+                accountEmail: const Text(
+                  'aaric@mail.com',
+                ),
+              ),
+              const MenuList()
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         title: const Text('Profile Page'),
       ),
@@ -18,16 +41,18 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 65,
-              backgroundImage: NetworkImage(
-                imgUrl,
-              ),
+              backgroundImage: AssetImage('assets/images/pro_pic.jpg'),
             ),
             const SizedBox(height: 20),
             const Text(
-              'Angelina Jolie',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+              'Aarick Hilson',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Rowdies',
+              ),
             ),
             const SizedBox(height: 8),
             const Text(
@@ -87,6 +112,45 @@ class ProfilePage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class MenuList extends StatelessWidget {
+  const MenuList({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: const [
+        ListTile(
+          leading: Icon(Icons.home),
+          title: Text('Home Page'),
+          trailing: Icon(Icons.edit),
+        ),
+        ListTile(
+          leading: Icon(Icons.present_to_all),
+          title: Text('About Page'),
+          trailing: Icon(Icons.edit),
+        ),
+        ListTile(
+          leading: Icon(Icons.person),
+          title: Text('Profle Page'),
+          trailing: Icon(Icons.edit),
+        ),
+        ListTile(
+          leading: Icon(Icons.settings),
+          title: Text('Settings Page'),
+          trailing: Icon(Icons.edit),
+        ),
+        ListTile(
+          leading: Icon(Icons.contact_page),
+          title: Text('Contact Page'),
+          trailing: Icon(Icons.edit),
+        ),
+      ],
     );
   }
 }
