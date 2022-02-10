@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_12/page_one.dart';
 import 'package:flutter_application_12/page_two.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   String imgUrl =
       'https://images.pexels.com/photos/5119214/pexels-photo-5119214.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260';
+
+  bool isExpand = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +24,10 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             children: [
               UserAccountsDrawerHeader(
-                onDetailsPressed: () {},
+                onDetailsPressed: () {
+                  isExpand = !isExpand;
+                  setState(() {});
+                },
                 otherAccountsPicturesSize: const Size.square(35),
                 otherAccountsPictures: [
                   CircleAvatar(backgroundImage: NetworkImage(imgUrl))
@@ -28,7 +39,7 @@ class ProfilePage extends StatelessWidget {
                   'aaric@mail.com',
                 ),
               ),
-              const MenuList()
+              isExpand ? MenuList() : CustomContainer()
             ],
           ),
         ),
@@ -93,7 +104,7 @@ class ProfilePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return const PageOne();
+                      return PageOne();
                     }));
                   },
                   child: const Text('Page One'),
@@ -151,6 +162,23 @@ class MenuList extends StatelessWidget {
           trailing: Icon(Icons.edit),
         ),
       ],
+    );
+  }
+}
+
+class CustomContainer extends StatelessWidget {
+  const CustomContainer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      // color: Colors.amber,
+      alignment: Alignment.center,
+      child: const Text(
+        'My Custom\nContainer',
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }
